@@ -4,16 +4,18 @@ rabbit1:
   image: "rabbitmq:3-management"
   hostname: "rabbit1"
   environment:
-    RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-    RABBITMQ_DEFAULT_USER: "rabbitmq"
-    RABBITMQ_DEFAULT_PASS: "rabbitmq"
+    RABBITMQ_DEFAULT_USER: "guest"
+    RABBITMQ_DEFAULT_PASS: "guest"
     RABBITMQ_DEFAULT_VHOST: "/"
+    # Máximo de Memória que o Rabbit continuará aceitando novas mensagens
+    # recomendado de 0.40 to 0.66
+    RABBITMQ_VM_MEMORY_HIGH_WATERMARK: "0.66" 
   ports:
     - "15672:15672"
     - "5672:5672"
   labels:
     NAME: "rabbitmq1"
-  volumes:
-    - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
-    #- "./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"
-    #- "./autocluster-0.4.1.ez:/usr/lib/rabbitmq/lib/rabbitmq_server-3.5.5/plugins/autocluster-0.4.1.ez"
+  #volumes:
+    #- "/Users/eder.freitas/rabbitmq-compose/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    #- ./conf/:/etc/rabbitmq/
+    #- /Users/eder.freitas/plugpharma-rabbitmq/log/:/var/log/rabbitmq
